@@ -1,0 +1,230 @@
+#!/bin/bash
+
+install docker 
+#yum install docker (Centos Fedora, rpm family )
+#apt install docker ( ubuntu , debian family )
+
+check the status of docker daemon
+#systemctl status  docker
+
+start and enabled docker daemon
+#systemctl enable docker
+#systemctl start  docker
+#systemctl status  docker
+
+getting help 
+#docker --help
+#man docker
+
+
+Docker Daemon  --- interact with host machine
+Docker client  --- interact daemon
+
+
+==============================================================================
+list docker images
+#docker images
+
+
+list active containers
+#docker ps 
+
+List Exited containers
+#docker ps -a
+
+==============================================================================
+
+run hello-world programe inside container
+#docker run hello-world
+#docker images
+#docker ps 
+#docker ps -a
+
+run hello-world programe inside container with container name
+#docker run --name mycontainer hello-world 
+#docker ps -a
+
+Run container in background and print container ID (-d, --detach)
+#docker run -d --name cont2 hello-world 
+#docker ps 
+
+
+==============================================================================
+Search images docker hub
+#docker search ubuntu
+registry (docker hub)
+||
+repo (like images / centos 7/8)
+||
+images --tags (7/8)
+
+registry/username/repo:tag
+
+#docker.io/hello-world:lates
+
+==============================================================================
+
+#docker run
+docker run container and terminated immediatly
+Docker run command in attached and detached mode
+
+#Docker detached mode
+Detached mode, shown by the option --detach or -d, means that a Docker container
+runs in the background of your terminal. It does not receive input or 
+display output.
+
+#docker run --name name-of-conatiner   -d    IMAGENAME
+exmple:
+
+#docker run --name cont1 -d ubuntu
+#docker ps 
+
+
+#Docker attached Mode
+Now attached the detached container
+#docker attach container-id or container-name
+#docker attach cont1
+
+(ctrl p & ctrl q) 
+
+==============================================================================
+
+#Managing Containers Life cycle (Start stop restart attach remove )
+
+#docker ps
+#docker stop container-id
+
+#docker ps -a
+#docker start container-id
+#docker attach container-id
+(ctrl p & ctrl q ) logout container
+
+#docker stop container-id
+#docker rm container-id
+
+
+==============================================================================
+
+# [Container info ]
+
+#docker info
+inspect Return low-level information on Docker objects
+#docker ps
+#docker inspect container-id
+
+#docker images
+#docker inspect image-id
+
+containers logs
+#docker logs conatainerid
+
+history images
+#docker history imageid
+
+==============================================================================
+
+rename conatiners
+#docker ps
+#docker ps -a
+#docker rename containerid new_name
+
+
+save running container state
+
+#docker ps
+#docker commit conatinerid newname
+#docker images
+
+create new container from container snapshot
+#docker run -it newname /bin/bash
+
+
+copy file between host and conatiners
+host to container
+	
+#echo "This is my test file" > myfile
+#ls 
+
+#docker cp myfile container-id:/root/
+#docker exec container-id ls /root
+
+
+container to host
+#docker cp conatinerid:/etc/hostname /root
+#ls /root
+
+==============================================================================
+Create Docker custom images
+1. commit (snapshot)
+2. dockerfile
+3. Docker images
+
+#DockerFile -- > Docker-Image ---> Containers
+	  docker-engine
+
+
+create custom image from centos (ssh )
+#mkdir images
+#cd images
+#vim Dockerfile
+	FROM centos:latest
+	LABLE Ds
+	MAINTAINER SONU LODHA
+	RUN yum install openssh-server -y
+	CMD ["/bin/bash"]
+
+#docker build -t centos:ssh .
+#docker images
+#docker run -it --name myssh  centos:ssh
+	userad sonu
+	passwd sonu
+        yum install ssh -y
+	passwd sonu
+(ctrl+p ctrl+q)
+
+#docker ps 
+===============================================================================
+
+Access Container from Outside
+#-p, --publish list Publish a container's port(s) to the host
+#-P, --publish-all  Publish all exposed ports to random ports
+
+#docker run -it --name cont-name -p hostport:containerport  image-name
+
+
+#docker ps 
+#docker inspect myssh2
+
+
+ 
+===============================================================================
+
+Push image huh.docker.com
+
+#docker login
+#docker build -t mitrasonu/centos:ssh
+
+#docker images
+
+#docker push 	  mitrasonu/centos:ssh
+
+
+
+===============================================================================
+
+
+
+
+
+
+
+#Docker Compose installation
+#Check the current release and if necessary, update it in the command below:
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#Next, set the permissions to make the binary executable:
+sudo chmod +x /usr/local/bin/docker-compose
+#Then, verify that the installation was successful by checking the version:
+docker-compose --version
+
+
+
