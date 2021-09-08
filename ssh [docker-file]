@@ -1,0 +1,13 @@
+# comment line centos7 openssh port 22 service sshd
+FROM centos
+LABEL description="This is a custom sshd container image"
+MAINTAINER SONU LODHA <sonulodha@yahoo.com>
+RUN yum install openssh-server -y
+RUN useradd student
+RUN echo student@123 | passwd --stdin student
+RUN ssh-keygen -A
+EXPOSE 22
+WORKDIR /tmp
+ADD https://github.com/sonulodha/devops-lab/blob/master/docker-installation /root/
+CMD ["/usr/sbin/sshd", "-D"]
+RUN rm -f /var/run/nologin    
