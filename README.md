@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @sachin12msd
 - 👀 I’m interested in ... LINUX | DEVOPS|
-- 🌱 I’m currently learning ... B.tech
+- 🌱 I’m completed my ... B.tech
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...sachin12msd@gmail.com
 
